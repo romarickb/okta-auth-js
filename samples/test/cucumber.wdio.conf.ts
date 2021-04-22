@@ -2,14 +2,15 @@ require('@okta/env'); // Read environment variables from "testenv"
 require('@babel/register'); // Allows use of import module syntax
 require('regenerator-runtime'); // Allows use of async/await
 
-const getSampleSpecs = require('./util/configUtils').getSampleSpecs;
-const specs = getSampleSpecs();
+const configUtils = require('./util/configUtils');
+const specs = configUtils.getSampleFeatures();
+console.log('SPECS', specs);
 
 const DEBUG = process.env.DEBUG;
 const CI = process.env.CI;
 const LOG = process.env.LOG;
-const defaultTimeoutInterval = DEBUG ? (24 * 60 * 60 * 1000) : 30000;
-const logLevel = (LOG || 'warn');
+const defaultTimeoutInterval = DEBUG ? (24 * 60 * 60 * 1000) : 10000;
+const logLevel = LOG || 'warn';
 const chromeOptions = {
     args: []
 };
@@ -26,16 +27,57 @@ if (CI) {
     ]);
 }
 
-// driver version must match installed chrome version
-// https://chromedriver.storage.googleapis.com/index.html
-const CHROMEDRIVER_VERSION = '89.0.4389.23';
-const drivers = {
-  chrome: { version: CHROMEDRIVER_VERSION }
+ // If you are using Cucumber you need to specify the location of your step definitions.
+const cucumberOpts: WebdriverIO.CucumberOpts = {
+  // <boolean> show full backtrace for errors
+  backtrace: false,
+  // <string[]> module used for processing required features
+  requireModule: [],
+  // <boolean< Treat ambiguous definitions as errors
+  failAmbiguousDefinitions: true,
+  // <boolean> invoke formatters without executing steps
+  // dryRun: false,
+  // <boolean> abort the run on first failure
+  failFast: false,
+  // <boolean> Enable this config to treat undefined definitions as
+  // warnings
+  ignoreUndefinedDefinitions: false,
+  // <string[]> ("extension:module") require files with the given
+  // EXTENSION after requiring MODULE (repeatable)
+  names: [],
+  // <boolean> hide step definition snippets for pending steps
+  snippets: true,
+  // <boolean> hide source uris
+  source: true,
+  // <string[]> (name) specify the profile to use
+  profile: [],
+  // <string[]> (file/dir) require files before executing features
+  require: [
+      './steps/given.ts',
+      './steps/then.ts',
+      './steps/when.ts',
+      // Or search a (sub)folder for JS files with a wildcard
+      // works since version 1.1 of the wdio-cucumber-framework
+      // './src/**/*.js',
+  ],
+  scenarioLevelReporter: false,
+  order: 'defined',
+  // <string> specify a custom snippet syntax
+  snippetSyntax: undefined,
+  // <boolean> fail if there are any undefined or pending steps
+  strict: true,
+  // <string> (expression) only execute the features or scenarios with
+  // tags matching the expression, see
+  // https://docs.cucumber.io/tag-expressions/
+  tagExpression: 'not @Pending',
+  // <boolean> add cucumber tags to feature or scenario name
+  tagsInTitle: false,
+  // <number> timeout for step definitions
+  timeout: defaultTimeoutInterval,
 };
 
-module.exports.config = {
+export const config: WebdriverIO.Config = {
 
-    //
     // ====================
     // Runner Configuration
     // ====================
@@ -143,23 +185,16 @@ module.exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: [
-      ['selenium-standalone', {
-        installArgs: {
-          drivers
-        },
-        args: {
-          drivers
-        }
-      }]
-    ],
+    services: ['chromedriver'],
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks.html
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
-    framework: 'mocha',
+    framework: 'cucumber',
+
+    cucumberOpts,
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
@@ -167,23 +202,8 @@ module.exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
-    reporters: [
-      'spec',
-      ['junit', {
-          outputDir: '../../build2/reports/e2e',
-          outputFileFormat: function() { // optional
-              return 'junit-results.xml';
-          }
-      }]
-  ],
+    reporters: ['spec'],
 
-    //
-    // Options to be passed to Mocha.
-    // See the full list at http://mochajs.org/
-    mochaOpts: {
-        ui: 'bdd',
-        timeout: defaultTimeoutInterval
-    },
     //
     // =====
     // Hooks

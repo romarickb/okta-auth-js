@@ -37,9 +37,11 @@ function runWithConfig(sampleConfig) {
     ]
   }).then(() => {
     // 2. run webdriver based on if sauce is needed or not
-    let wdioConfig = 'wdio.conf.js';
+    let wdioConfig = 'wdio.conf.ts';
     if (process.env.RUN_SAUCE_TESTS) {
       wdioConfig = 'sauce.wdio.conf.js';
+    } else if (process.env.RUN_CUCUMBER_TESTS) {
+      wdioConfig = 'cucumber.wdio.conf.ts';
     }
 
     let opts = process.argv.slice(2); // pass extra arguments through

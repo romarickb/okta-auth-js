@@ -6,7 +6,7 @@ setup_service java 1.8.222
 setup_service google-chrome-stable 89.0.4389.72-1
 
 export TEST_SUITE_TYPE="junit"
-export TEST_RESULT_FILE_DIR="${REPO}/build2/reports/e2e"
+export TEST_RESULT_FILE_DIR="${REPO}/build2/reports/e2e-oie"
 
 export ISSUER=https://oie-widget-tests.sigmanetcorp.us/oauth2/default
 export USERNAME=george@acme.com
