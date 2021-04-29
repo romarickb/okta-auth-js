@@ -27,6 +27,13 @@ if (CI) {
     ]);
 }
 
+// driver version must match installed chrome version
+// https://chromedriver.storage.googleapis.com/index.html
+const CHROMEDRIVER_VERSION = '89.0.4389.23';
+const drivers = {
+  chrome: { version: CHROMEDRIVER_VERSION }
+};
+
  // If you are using Cucumber you need to specify the location of your step definitions.
 const cucumberOpts: WebdriverIO.CucumberOpts = {
   // <boolean> show full backtrace for errors
@@ -185,7 +192,16 @@ export const config: WebdriverIO.Config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['chromedriver'],
+    services: [
+      ['selenium-standalone', {
+        installArgs: {
+          drivers
+        },
+        args: {
+          drivers
+        }
+      }]
+    ],
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks.html
