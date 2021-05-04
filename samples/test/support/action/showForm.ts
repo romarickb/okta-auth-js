@@ -10,7 +10,7 @@ export default async (
   let selector;
   switch (formName) {
     case 'Password': {
-        url = '/login';
+        url = '/login/primary';
         selector = LoginForm.password;
         queryParams = { flow: 'form' };
         break;

@@ -29,6 +29,7 @@ router.get('/primary', renderLoginForm);
 router.post('/primary', async (req, res) => {
   const { username, password } = req.body;
   const authClient = getAuthClient(req);
+  debugger;
   try {
     const authTransaction = await authClient.idx.authenticate({ 
       username, 

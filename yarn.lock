@@ -2467,19 +2467,29 @@
     deepmerge "^4.0.0"
     glob "^7.1.2"
 
-"@wdio/cucumber-framework@^7.5.1":
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/@wdio/cucumber-framework/-/cucumber-framework-7.5.1.tgz#17908e219e5efca032c313415d789fa32f68bc09"
-  integrity sha512-t+fb2keR29+L2eogMobG1sA83Do01Zky5Uzl+D/xJOTGvZ2Ce8xvOGrEFSCBZF+ifioR1ORC8/XkpVoxb00Diw==
+"@wdio/config@7.5.3":
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@wdio/config/-/config-7.5.3.tgz#7bcc2b8c806f71143159cef7dbbfd4d85247d41a"
+  integrity sha512-udvVizYoilOxuWj/BmoN6y7ZCd4wPdYNlSfWznrbCezAdaLZ4/pNDOO0WRWx2C4+q1wdkXZV/VuQPUGfL0lEHQ==
+  dependencies:
+    "@wdio/logger" "7.5.3"
+    "@wdio/types" "7.5.3"
+    deepmerge "^4.0.0"
+    glob "^7.1.2"
+
+"@wdio/cucumber-framework@^7.5.3":
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@wdio/cucumber-framework/-/cucumber-framework-7.5.3.tgz#e2cac184205d384931db92070493dd11c448cd3c"
+  integrity sha512-p0sq7NMGQ02qiP5F5odODwvsCRjwock330zuYKoM+Qi47EuN+Fz8Jb5U9PP+Qt9FrZOt6WSCEqmwGd/JAcuzRA==
   dependencies:
     "@cucumber/cucumber" "7.0.0"
     "@cucumber/gherkin" "17.0.1"
     "@cucumber/messages" "15.0.0"
     "@types/is-glob" "^4.0.1"
     "@types/mockery" "^1.4.29"
-    "@wdio/logger" "7.4.2"
-    "@wdio/types" "7.4.2"
-    "@wdio/utils" "7.4.6"
+    "@wdio/logger" "7.5.3"
+    "@wdio/types" "7.5.3"
+    "@wdio/utils" "7.5.3"
     expect-webdriverio "^2.0.0"
     glob "^7.1.2"
     is-glob "^4.0.0"
@@ -2535,6 +2545,16 @@
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-7.4.2.tgz#f1c8b624751da2c5462f855071e7205131339a7e"
   integrity sha512-vYH0glKyw/rIJ/FJ4g+WQfx6MRKnWEPUspejv5Vit32STKa1IPotw/Y/Axv2qy6os1VHAs9CfH43930q9QZLkA==
+  dependencies:
+    chalk "^4.0.0"
+    loglevel "^1.6.0"
+    loglevel-plugin-prefix "^0.8.4"
+    strip-ansi "^6.0.0"
+
+"@wdio/logger@7.5.3":
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-7.5.3.tgz#50f81cf20b0cfbcbf1ab55d9a4c13d8e1129684e"
+  integrity sha512-r9EADpm0ncS1bDQSWi/nhF9C59/WNLbdAAFlo782E9ItFCpDhNit3aQP9vETv1vFxJRjUIM8Fw/HW8zwPadkbw==
   dependencies:
     chalk "^4.0.0"
     loglevel "^1.6.0"
@@ -2664,6 +2684,19 @@
     fs-extra "^9.0.1"
     selenium-standalone "^6.22.1"
 
+"@wdio/selenium-standalone-service@^7.5.3":
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@wdio/selenium-standalone-service/-/selenium-standalone-service-7.5.3.tgz#b34ff13810f57d6f7cdad128e74ba253eb911f48"
+  integrity sha512-sRczqo6HHL799bnLtJTrO0cP0HmfVL7JbT7LQYYFPopqvdLkkx3ooHhurroYSXHodoS2MKW0huVHbQ/Hi3nWgw==
+  dependencies:
+    "@types/fs-extra" "^9.0.1"
+    "@types/selenium-standalone" "^6.15.2"
+    "@wdio/config" "7.5.3"
+    "@wdio/logger" "7.5.3"
+    "@wdio/types" "7.5.3"
+    fs-extra "^9.0.1"
+    selenium-standalone "^6.22.1"
+
 "@wdio/spec-reporter@^6.6.0":
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/@wdio/spec-reporter/-/spec-reporter-6.11.0.tgz#99e0a03985c0dfccf57f4b24c75f03409e1caaca"
@@ -2693,6 +2726,13 @@
   dependencies:
     got "^11.8.1"
 
+"@wdio/types@7.5.3":
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@wdio/types/-/types-7.5.3.tgz#9239b00fd2c2ef75f7a6bda965b5be0855d97f7e"
+  integrity sha512-jmumhKBhNDABnpmrshYLEcdE9WoP5tmynsDNbDABlb/W8FFiLySQOejukhYIL9CLys4zXerV3/edks0SCzHOiQ==
+  dependencies:
+    got "^11.8.1"
+
 "@wdio/utils@6.11.0":
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-6.11.0.tgz#878c2500efb1a325bf5a66d2ff3d08162f976e8c"
@@ -2707,6 +2747,14 @@
   dependencies:
     "@wdio/logger" "7.4.2"
     "@wdio/types" "7.4.2"
+
+"@wdio/utils@7.5.3":
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-7.5.3.tgz#338e52c53927410a4e7364937e3239c23d4a90e7"
+  integrity sha512-nlLDKr8v8abLOHCKroBwQkGPdCIxjID2MllgWX23xqkYZylM9RdwPBdL8osQt9m3rq2TxiPAT4OlbzNt2WtN6Q==
+  dependencies:
+    "@wdio/logger" "7.5.3"
+    "@wdio/types" "7.5.3"
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"

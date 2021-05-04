@@ -125,16 +125,21 @@
     "outputDirectory": "./build2/reports/unit/",
     "outputName": "junit-result.xml"
   },
-  "workspaces": [
-    "./",
-    "env",
-    "test/app",
-    "test/e2e",
-    "test/support",
-    "samples",
-    "samples/test",
-    "samples/generated/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "./",
+      "env",
+      "test/app",
+      "test/e2e",
+      "test/support",
+      "samples",
+      "samples/test",
+      "samples/generated/*"
+    ],
+    "nohoist": [
+      "**/@wdio/**"
+    ]
+  },
   "tsd": {
     "directory": "test/types",
     "compilerOptions": {

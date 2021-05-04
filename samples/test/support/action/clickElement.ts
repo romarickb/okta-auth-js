@@ -28,5 +28,6 @@ export default async (
     await checkIfElementExists(selector2);
 
     const el = await $(selector2);
-    await el[method]();
+
+    await browser.execute(`arguments[0].${method}();`, el);
 };

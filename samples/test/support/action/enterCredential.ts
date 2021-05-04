@@ -3,11 +3,11 @@ import LoginForm from '../selectors/LoginForm';
 import { getConfig } from '../../util/configUtils';
 
 export default async (
-  credName: 'username' | 'password',
-  value?: string
+  credName: 'username' | 'password'
 ) => {
   const config = getConfig();
   let selector = null;
+  let value;
   switch (credName) {
     case 'username': {
       selector = LoginForm.username;

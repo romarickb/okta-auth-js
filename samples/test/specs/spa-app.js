@@ -80,7 +80,7 @@ describe('spa-app: ' + sampleConfig.name, () => {
 
   if (sampleConfig.signinWidget) {
     it.only('show social login buttons in self-hosted widget', async () => {
-      await startApp('/', { flow: 'widget', requireUserSession: true, idps: 'Facebook:111 Google:222' });
+      await startApp('/', { flow: 'widget', requireUserSession: true, idps: ['Facebook:111', 'Google:222'] });
       await clickSocialLoginButtons();
     });
   }
